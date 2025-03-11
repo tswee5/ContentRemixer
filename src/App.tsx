@@ -1,6 +1,19 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import RemixOptions from './components/RemixOptions'
+import { remixContent, tweetsFromPost, emailFromContent, blogPostFromContent, socialMediaFromContent } from './api/claude'
+
+// Map of remix options to descriptions for the UI
+const remixDescriptions: Record<string, string> = {
+  summarize: "Summarized content:",
+  simplify: "Simplified content:",
+  professional: "Professional version:",
+  casual: "Casual version:",
+  tweets: "Generated tweets:",
+  email: "Email version:",
+  blogPost: "Blog post version:",
+  socialMedia: "Social media posts:"
+};
 
 function App() {
   const [inputText, setInputText] = useState('')
@@ -14,24 +27,36 @@ function App() {
     setIsLoading(true)
     
     try {
-      // This is a placeholder for the actual API call
-      // In a real app, you would replace this with your Claude API endpoint
-      const response = await fetch('https://api.example.com/remix', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          text: inputText,
-          option: selectedOption 
-        }),
-      })
+      let result = '';
       
-      const data = await response.json()
-      setOutputText(data.remixedText || 'Error: No response from API')
+      // Use the appropriate specialized function based on the selected option
+      switch (selectedOption) {
+        case 'tweets':
+          result = await tweetsFromPost(inputText);
+          break;
+        case 'email':
+          result = await emailFromContent(inputText);
+          break;
+        case 'blogPost':
+          result = await blogPostFromContent(inputText);
+          break;
+        case 'socialMedia':
+          result = await socialMediaFromContent(inputText);
+          break;
+        default:
+          // Use the generic remixer for other options
+          result = await remixContent(inputText, selectedOption);
+      }
+      
+      setOutputText(result || 'Error: No response from API')
     } catch (error) {
       console.error('Error remixing content:', error)
-      setOutputText('Error remixing content. Please try again.')
+      // More detailed error message
+      if (error instanceof Error) {
+        setOutputText(`Error: ${error.message}. Please check the console for more details.`)
+      } else {
+        setOutputText('Error remixing content. Please try again.')
+      }
     } finally {
       setIsLoading(false)
     }
@@ -68,8 +93,10 @@ function App() {
         </div>
         
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold mb-4">Output</h2>
-          <div className="w-full min-h-40 p-3 border border-gray-300 rounded-md bg-gray-50">
+          <h2 className="text-xl font-semibold mb-4">
+            {remixDescriptions[selectedOption] || 'Output'}
+          </h2>
+          <div className="w-full min-h-40 p-3 border border-gray-300 rounded-md bg-gray-50 whitespace-pre-line">
             {outputText || 'Remixed content will appear here...'}
           </div>
         </div>

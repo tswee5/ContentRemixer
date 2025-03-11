@@ -31,6 +31,26 @@ const remixOptions: RemixOption[] = [
     id: 'casual',
     name: 'Casual Tone',
     description: 'Convert to a casual, friendly tone'
+  },
+  {
+    id: 'tweets',
+    name: 'Generate Tweets',
+    description: 'Create tweets from blog post content'
+  },
+  {
+    id: 'email',
+    name: 'Generate Email',
+    description: 'Convert content into a professional email'
+  },
+  {
+    id: 'blogPost',
+    name: 'Generate Blog Post',
+    description: 'Expand content into a structured blog post'
+  },
+  {
+    id: 'socialMedia',
+    name: 'Social Media Posts',
+    description: 'Create posts for various social platforms'
   }
 ];
 

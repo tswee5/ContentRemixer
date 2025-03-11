@@ -1,13 +1,21 @@
 # Content Remixer
 
-A simple content remixing tool built with React and Tailwind CSS.
+A versatile content remixing tool built with React and Tailwind CSS, powered by Claude AI.
 
 ## Features
 
 1. Paste in text you want to remix
-2. Click a button to apply the remixing
-3. Send the request to AI API endpoint
-4. See the remix in the output box
+2. Choose from multiple remix options:
+   - Summarize content
+   - Simplify complex text
+   - Convert to professional tone
+   - Convert to casual tone
+   - Generate tweets from blog posts
+   - Create professional emails
+   - Expand content into blog posts
+   - Generate social media posts
+3. Send the request to Claude AI API
+4. See the remixed content in the output box
 
 ## Getting Started
 
@@ -39,12 +47,41 @@ npm run dev
 2. Click the "Remix Content" button
 3. View the remixed content in the output box
 
+## Specialized Remixer Functions
+
+The app now includes specialized remixer functions for different use cases:
+
+### Tweet Generation
+- Converts blog posts into a series of tweets
+- Follows the style and tone of the original content
+- Ensures tweets are under 280 characters
+- Returns at least 5 tweet options
+
+### Email Generation
+- Converts content into a professional email format
+- Includes subject line, greeting, body, and closing
+- Maintains professional tone
+
+### Blog Post Generation
+- Expands content into a well-structured blog post
+- Includes introduction, body paragraphs with subheadings, and conclusion
+- Maintains key points from the original content
+
+### Social Media Post Generation
+- Creates 3-5 different posts for various platforms
+- Each post highlights different aspects of the original content
+- Optimized for engagement
+
 ## API Integration
 
-The app is currently set up with a placeholder API endpoint. To connect to a real Claude API:
+The app uses the Anthropic Claude API for content remixing. To set up:
 
-1. Update the fetch URL in `src/App.tsx` to point to your actual API endpoint
-2. Ensure your API returns a JSON response with a `remixedText` property
+1. Get an API key from Anthropic
+2. Create a `.env` file in the root directory with:
+   ```
+   VITE_CLAUDE_API_KEY=your_api_key_here
+   ```
+3. Install dependencies and start the server
 
 ## Deployment
 
