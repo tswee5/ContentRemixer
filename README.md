@@ -1,6 +1,59 @@
 # Content Remixer
 
-A versatile content remixing tool built with React and Tailwind CSS, powered by Claude AI.
+A web application that allows you to remix your content into different formats using AI, including generating tweets, emails, blog posts, and more.
+
+## New Feature: Save Tweets for Later
+
+You can now save generated tweets to a database and access them later from the "Saved Tweets" sidebar. This feature allows you to:
+
+- Save tweets you like for later use
+- View all your saved tweets in a sidebar
+- Tweet directly from the saved tweets list
+- Delete saved tweets you no longer need
+
+## Setup
+
+1. Clone the repository
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Create a Supabase account and project at [https://supabase.com](https://supabase.com)
+4. In your Supabase project, create a new table called `saved_tweets` with the following columns:
+   - `id` (uuid, primary key)
+   - `content` (text, not null)
+   - `created_at` (timestamp with time zone, default: now())
+5. Copy the `.env.example` file to `.env` and fill in your Supabase credentials:
+   ```
+   cp .env.example .env
+   ```
+6. Update the `.env` file with your Supabase URL and anon key from your Supabase project settings
+7. Start the development server:
+   ```
+   npm run dev
+   ```
+
+## Usage
+
+1. Enter your content in the input box
+2. Select a remix option (summarize, simplify, professional tone, etc.)
+3. Click "Remix Content" to generate the remixed content
+4. For tweets:
+   - Click "Save" to save a tweet to your database for later use
+   - Click "Tweet" to open Twitter with the tweet pre-filled
+5. Click "Saved Tweets" in the top right to view your saved tweets
+6. From the saved tweets sidebar, you can:
+   - View all your saved tweets
+   - Tweet directly from the saved list
+   - Delete tweets you no longer need
+
+## Technologies Used
+
+- React
+- TypeScript
+- Tailwind CSS
+- Supabase (for database)
+- Claude API (for content remixing)
 
 ## Features
 
@@ -16,36 +69,6 @@ A versatile content remixing tool built with React and Tailwind CSS, powered by 
    - Generate social media posts
 3. Send the request to Claude AI API
 4. See the remixed content in the output box
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v14 or later)
-- npm or yarn
-
-### Installation
-
-1. Clone this repository
-2. Install dependencies:
-
-```bash
-npm install
-```
-
-3. Start the development server:
-
-```bash
-npm run dev
-```
-
-4. Open your browser and navigate to the URL shown in the terminal (typically http://localhost:5173)
-
-## Usage
-
-1. Paste your content into the input box
-2. Click the "Remix Content" button
-3. View the remixed content in the output box
 
 ## Specialized Remixer Functions
 
